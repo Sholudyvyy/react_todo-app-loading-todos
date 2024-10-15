@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { TodoCompletedCategory } from '../../types/TodoCompletedCategory';
+// eslint-disable-next-line max-len, prettier/prettier
+import { TodoCompletedCategory as CompletedCategory } from '../../types/TodoCompletedCategory';
 
 type Props = {
   countOfNotCompletedTodos: number;
-  completedCategory: TodoCompletedCategory;
-  // eslint-disable-next-line max-len, prettier/prettier
-  onCompletedCategory: React.Dispatch<React.SetStateAction<TodoCompletedCategory>>;
+  completedCategory: CompletedCategory;
+  onCompletedCategory: React.Dispatch<React.SetStateAction<CompletedCategory>>;
 };
 
 export const TodoFooter: React.FC<Props> = ({
@@ -23,10 +23,10 @@ export const TodoFooter: React.FC<Props> = ({
         <a
           href="#/"
           className={classNames('filter__link', {
-            selected: completedCategory === TodoCompletedCategory.all,
+            selected: completedCategory === CompletedCategory.all,
           })}
           data-cy="FilterLinkAll"
-          onClick={() => onCompletedCategory(TodoCompletedCategory.all)}
+          onClick={() => onCompletedCategory(CompletedCategory.all)}
         >
           All
         </a>
@@ -34,10 +34,10 @@ export const TodoFooter: React.FC<Props> = ({
         <a
           href="#/active"
           className={classNames('filter__link', {
-            selected: completedCategory === TodoCompletedCategory.active,
+            selected: completedCategory === CompletedCategory.active,
           })}
           data-cy="FilterLinkActive"
-          onClick={() => onCompletedCategory(TodoCompletedCategory.active)}
+          onClick={() => onCompletedCategory(CompletedCategory.active)}
         >
           Active
         </a>
@@ -45,10 +45,10 @@ export const TodoFooter: React.FC<Props> = ({
         <a
           href="#/completed"
           className={classNames('filter__link', {
-            selected: completedCategory === TodoCompletedCategory.completed,
+            selected: completedCategory === CompletedCategory.completed,
           })}
           data-cy="FilterLinkCompleted"
-          onClick={() => onCompletedCategory(TodoCompletedCategory.completed)}
+          onClick={() => onCompletedCategory(CompletedCategory.completed)}
         >
           Completed
         </a>
