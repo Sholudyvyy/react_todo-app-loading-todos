@@ -18,12 +18,14 @@ export const App: React.FC = () => {
   const [countOfNotCompletedTodos, setCountOfNotCompletedTodos] = useState(0);
   const [errorMessage, setErrorMessage] = useState<Errors>(Errors.noneError);
 
-  function setTodosFromApi() {
-    getTodos()
-      .then(listOfTodo => {
-        setTodos(listOfTodo);
-      })
-      .catch(() => setErrorMessage(Errors.loadError));
+  async function setTodosFromApi() {
+    try {
+      const todosFromApi = await getTodos();
+
+      setTodos(todosFromApi);
+    } catch {
+      setErrorMessage(Errors.loadError);
+    }
   }
 
   useEffect(() => {
