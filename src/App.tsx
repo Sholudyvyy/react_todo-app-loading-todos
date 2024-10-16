@@ -12,11 +12,11 @@ import { Errors } from './types/Errors';
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [filtredTodos, setFiltredTodos] = useState<Todo[]>([]);
   const [completedCategory, setCompletedCategory] =
     useState<TodoCompletedCategory>(TodoCompletedCategory.all);
-  const [countOfNotCompletedTodos, setCountOfNotCompletedTodos] = useState(0);
   const [errorMessage, setErrorMessage] = useState<Errors>(Errors.noneError);
+  const countOfNotCompletedTodos = todos.filter(todo => !todo.completed).length;
+  const filtredTodos = filterTodosByComplated(todos, completedCategory);
 
   async function setTodosFromApi() {
     try {
@@ -31,22 +31,6 @@ export const App: React.FC = () => {
   useEffect(() => {
     setTodosFromApi();
   }, []);
-
-  useEffect(() => {
-    setFiltredTodos(filterTodosByComplated(todos, completedCategory));
-  }, [todos, completedCategory]);
-
-  useEffect(() => {
-    setCountOfNotCompletedTodos(todos.filter(todo => !todo.completed).length);
-  }, [todos]);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setErrorMessage(Errors.noneError);
-    }, 3000);
-
-    return () => clearTimeout(timeoutId);
-  }, [errorMessage]);
 
   return (
     <div className="todoapp">
