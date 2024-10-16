@@ -8,6 +8,12 @@ type Props = {
   onCompletedCategory: React.Dispatch<React.SetStateAction<CompletedCategory>>;
 };
 
+const categoryForNav = {
+  [CompletedCategory.active]: 'Active',
+  [CompletedCategory.completed]: 'Completed',
+  [CompletedCategory.all]: 'All',
+};
+
 export const TodoFooter: React.FC<Props> = ({
   countOfNotCompletedTodos,
   completedCategory,
@@ -20,45 +26,26 @@ export const TodoFooter: React.FC<Props> = ({
       </span>
 
       <nav className="filter" data-cy="Filter">
-        <a
-          href="#/"
-          className={classNames('filter__link', {
-            selected: completedCategory === CompletedCategory.all,
-          })}
-          data-cy="FilterLinkAll"
-          onClick={() => onCompletedCategory(CompletedCategory.all)}
-        >
-          All
-        </a>
-
-        <a
-          href="#/active"
-          className={classNames('filter__link', {
-            selected: completedCategory === CompletedCategory.active,
-          })}
-          data-cy="FilterLinkActive"
-          onClick={() => onCompletedCategory(CompletedCategory.active)}
-        >
-          Active
-        </a>
-
-        <a
-          href="#/completed"
-          className={classNames('filter__link', {
-            selected: completedCategory === CompletedCategory.completed,
-          })}
-          data-cy="FilterLinkCompleted"
-          onClick={() => onCompletedCategory(CompletedCategory.completed)}
-        >
-          Completed
-        </a>
+        {Object.values(CompletedCategory).map(category => (
+          <a
+            key={category}
+            href={`#/${category}`}
+            className={classNames('filter__link', {
+              selected: completedCategory === category,
+            })}
+            data-cy={`FilterLink${categoryForNav[category]}`}
+            onClick={() => onCompletedCategory(category)}
+          >
+            {categoryForNav[category]}
+          </a>
+        ))}
       </nav>
 
       <button
         type="button"
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
-        disabled={countOfNotCompletedTodos !== 0}
+        disabled={countOfNotCompletedTodos === 0}
       >
         Clear completed
       </button>

@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
-import React, { useState } from 'react';
 import { Todo } from '../../types/Todo';
 import classNames from 'classnames';
 
@@ -9,14 +8,10 @@ type Props = {
 };
 
 export const TodoTask: React.FC<Props> = ({ todo }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div
       data-cy="Todo"
       className={classNames('todo', { 'todo completed': todo.completed })}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <label className="todo__status-label">
         <input
@@ -46,9 +41,7 @@ export const TodoTask: React.FC<Props> = ({ todo }) => {
 
       <button
         type="button"
-        className={classNames('todo__remove', {
-          hidden: !isHovered,
-        })}
+        className={classNames('todo__remove')}
         data-cy="TodoDelete"
       >
         ×

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { UserWarning } from './UserWarning';
-import { getTodos, USER_ID } from './api/todos';
+import { getTodos } from './api/todos';
 import { Todo } from './types/Todo';
 import { TodoList } from './components/TodoList/TodoList';
 import { TodoFooter } from './components/TodoFooter/TodoFooter';
@@ -46,10 +45,6 @@ export const App: React.FC = () => {
 
     return () => clearTimeout(timeoutId);
   }, [errorMessage]);
-
-  if (!USER_ID) {
-    return <UserWarning />;
-  }
 
   return (
     <div className="todoapp">
