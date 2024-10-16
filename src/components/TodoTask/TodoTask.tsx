@@ -26,7 +26,6 @@ export const TodoTask: React.FC<Props> = ({ todo }) => {
         {todo.title}
       </span>
 
-      {/* This form is shown instead of the title and remove button */}
       {false && (
         <form>
           <input
@@ -47,8 +46,6 @@ export const TodoTask: React.FC<Props> = ({ todo }) => {
         ×
       </button>
 
-      {/* overlay will cover the todo while it is being deleted or updated */}
-      {/* 'is-active' class puts this modal on top of the todo */}
       <div data-cy="TodoLoader" className="modal overlay">
         <div className="modal-background has-background-white-ter" />
         <div className="loader" />

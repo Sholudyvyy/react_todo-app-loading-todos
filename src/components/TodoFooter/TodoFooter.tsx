@@ -1,17 +1,16 @@
 import classNames from 'classnames';
-// eslint-disable-next-line max-len, prettier/prettier
-import { TodoCompletedCategory as CompletedCategory } from '../../types/TodoCompletedCategory';
+import { TodoCompletedCategory } from '../../types/TodoCompletedCategory';
 
 type Props = {
   countOfNotCompletedTodos: number;
-  completedCategory: CompletedCategory;
-  onCompletedCategory: React.Dispatch<React.SetStateAction<CompletedCategory>>;
+  completedCategory: TodoCompletedCategory;
+  onCompletedCategory: (category: TodoCompletedCategory) => void;
 };
 
-const categoryForNav = {
-  [CompletedCategory.active]: 'Active',
-  [CompletedCategory.completed]: 'Completed',
-  [CompletedCategory.all]: 'All',
+const activityFilters = {
+  [TodoCompletedCategory.active]: 'Active',
+  [TodoCompletedCategory.completed]: 'Completed',
+  [TodoCompletedCategory.all]: 'All',
 };
 
 export const TodoFooter: React.FC<Props> = ({
@@ -26,17 +25,17 @@ export const TodoFooter: React.FC<Props> = ({
       </span>
 
       <nav className="filter" data-cy="Filter">
-        {Object.values(CompletedCategory).map(category => (
+        {Object.values(TodoCompletedCategory).map(category => (
           <a
             key={category}
             href={`#/${category}`}
             className={classNames('filter__link', {
               selected: completedCategory === category,
             })}
-            data-cy={`FilterLink${categoryForNav[category]}`}
+            data-cy={`FilterLink${activityFilters[category]}`}
             onClick={() => onCompletedCategory(category)}
           >
-            {categoryForNav[category]}
+            {activityFilters[category]}
           </a>
         ))}
       </nav>
@@ -45,7 +44,7 @@ export const TodoFooter: React.FC<Props> = ({
         type="button"
         className="todoapp__clear-completed"
         data-cy="ClearCompletedButton"
-        disabled={countOfNotCompletedTodos === 0}
+        disabled={!countOfNotCompletedTodos}
       >
         Clear completed
       </button>

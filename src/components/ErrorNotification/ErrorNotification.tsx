@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 type Props = {
   errorMessage: Errors;
-  onErrorMessage: React.Dispatch<React.SetStateAction<Errors>>;
+  onErrorMessage: (error: Errors) => void;
 };
 
 export const ErrorNotification: React.FC<Props> = ({

@@ -16,7 +16,6 @@ export const TodoHeader: React.FC<Props> = ({ isAllTodosCompleted }) => {
         data-cy="ToggleAllButton"
       />
 
-      {/* Add a todo on form submit */}
       <form>
         <input
           autoFocus

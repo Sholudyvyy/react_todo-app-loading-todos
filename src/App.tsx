@@ -18,7 +18,7 @@ export const App: React.FC = () => {
   const countOfNotCompletedTodos = todos.filter(todo => !todo.completed).length;
   const filtredTodos = filterTodosByComplated(todos, completedCategory);
 
-  async function setTodosFromApi() {
+  async function fetchTodosFromApi() {
     try {
       const todosFromApi = await getTodos();
 
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
   }
 
   useEffect(() => {
-    setTodosFromApi();
+    fetchTodosFromApi();
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export const App: React.FC = () => {
 
       <div className="todoapp__content">
         <TodoHeader isAllTodosCompleted={countOfNotCompletedTodos === 0} />
-        {todos.length !== 0 && (
+        {!!todos.length && (
           <>
             <TodoList todos={filtredTodos} />
             <TodoFooter
